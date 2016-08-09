@@ -76,6 +76,20 @@ class BitMatrixTests: XCTestCase {
         print(b)
         print(p!)
     }
+    
+    func testElements() {
+        var a = BitMatrix<Byte>(numberOfRows: 4, numberOfColumns: 4)
+        let array = [
+            Byte(0x00),Byte(0x04),Byte(0x08),Byte(0x0c),
+            Byte(0x01),Byte(0x05),Byte(0x09),Byte(0x0d),
+            Byte(0x02),Byte(0x06),Byte(0x0a),Byte(0x0e),
+            Byte(0x03),Byte(0x07),Byte(0x0b),Byte(0x0f),
+        ]
+        a.elements = array
+        print(a)
+        print(a.elements)
+        XCTAssert(a.elements == array)
+    }
 
 
     static var allTests : [(String, (BitMatrixTests) -> () throws -> Void)] {

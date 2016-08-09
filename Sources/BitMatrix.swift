@@ -34,6 +34,25 @@ public struct BitMatrix<T:Element>: Equatable {
             self.data[row][col] = newValue
         }
     }
+    
+    public var elements:[T] {
+        get{
+            var result = [T]()
+            for col in 0..<self.numberOfColumns {
+                for row in 0..<self.numberOfRows {
+                    result.append(self[row, col])
+                }
+            }
+            return result
+        }
+        mutating set(array) {
+            for col in 0..<self.numberOfColumns {
+                for row in 0..<self.numberOfRows {
+                    self[row, col] = array[col * self.numberOfColumns + row]
+                }
+            }
+        }
+    }
 }
 
 public func ==<T>(lhs: BitMatrix<T>, rhs:BitMatrix<T>) -> Bool {
