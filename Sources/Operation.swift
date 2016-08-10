@@ -23,7 +23,7 @@ extension BitMatrix {
             if Int(arc4random()) % 2 == 0 {
                 operation.append(.SwitchRow(row1: row1, row2: row2))
             } else {
-                operation.append(.SwitchRow(row1: row1, row2: row2))
+                operation.append(.AddRow(row1: row1, row2: row2))
                 
             }
         }
