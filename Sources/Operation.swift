@@ -57,3 +57,32 @@ private enum Operation {
     case AddRow(row1: Int, row2: Int)
 }
 
+extension BitMatrix {
+    public func subMatrix(row1: Int = 0, col1: Int = 0,
+                          row2 tempRow: Int = -1, col2 tempCol: Int = -1) ->BitMatrix! {
+        var row2 = tempRow
+        var col2 = tempCol
+        if tempRow == -1 {
+            row2 = self.numberOfRows - 1
+        }
+        if (col2 == -1 ) {
+            col2 = self.numberOfColumns - 1
+        }
+        guard
+            row1 >= 0 && col1 >= 0 &&
+                row2 >= row1 && col2 >= col1 &&
+                self.numberOfRows > row2 && self.numberOfColumns > col2
+            else {
+                return nil
+        }
+        var result = BitMatrix(numberOfRows: row2 - row1 + 1, numberOfColumns: col2 - col1 + 1)
+        for row in 0..<row2 - row1 + 1 {
+            for col in 0..<col2-col1 + 1 {
+                result[row, col] = self[row + row1, col + col1]
+            }
+        }
+        return result
+    }
+}
+
+
