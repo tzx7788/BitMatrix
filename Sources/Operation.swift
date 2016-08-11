@@ -85,7 +85,7 @@ extension BitMatrix {
     }
 }
 
-infix operator -- {}
+infix operator -- { associativity left }
 func --<T:Element>(lhs:BitMatrix<T>, rhs:BitMatrix<T>) -> BitMatrix<T> {
     var result = BitMatrix<T>(numberOfRows: lhs.numberOfRows + rhs.numberOfRows, numberOfColumns: lhs.numberOfColumns + rhs.numberOfColumns)
     for row in 0..<lhs.numberOfRows {
