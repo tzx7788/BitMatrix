@@ -90,6 +90,14 @@ class BitMatrixTests: XCTestCase {
         print(a.elements)
         XCTAssert(a.elements == array)
     }
+    
+    func testMatrixLink() {
+        let (a, b) = BitMatrix<Byte>.generate_inversedMatrixes(size: 20, randTimes: 100)
+        let p = a -- b
+        print(a)
+        print(b)
+        print(p)
+    }
 
 
     static var allTests : [(String, (BitMatrixTests) -> () throws -> Void)] {

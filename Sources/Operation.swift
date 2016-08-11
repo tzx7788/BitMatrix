@@ -85,4 +85,20 @@ extension BitMatrix {
     }
 }
 
+infix operator -- {}
+func --<T:Element>(lhs:BitMatrix<T>, rhs:BitMatrix<T>) -> BitMatrix<T> {
+    var result = BitMatrix<T>(numberOfRows: lhs.numberOfRows + rhs.numberOfRows, numberOfColumns: lhs.numberOfColumns + rhs.numberOfColumns)
+    for row in 0..<lhs.numberOfRows {
+        for col in 0..<lhs.numberOfColumns {
+            result[row, col] = lhs[row, col]
+        }
+    }
+    for row in 0..<rhs.numberOfRows {
+        for col in 0..<rhs.numberOfColumns {
+            result[row + lhs.numberOfRows, col + lhs.numberOfColumns] = rhs[row, col]
+        }
+    }
+    return result
+}
+
 
