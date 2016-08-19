@@ -26,7 +26,7 @@ public struct BitMatrix<T:Element>: Equatable {
         }
     }
     
-    public subscript(_ row: Int, _ col: Int) -> T {
+    public subscript(row: Int, col: Int) -> T {
         get {
             return self.data[row][col]
         }

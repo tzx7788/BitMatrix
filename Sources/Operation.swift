@@ -10,7 +10,7 @@ import Foundation
 
 extension BitMatrix {
     
-    static public func generate_inversedMatrixes(size:Int ,randTimes: Int = 100) -> (BitMatrix<T>, BitMatrix<T>) {
+    static public func generate_inversedMatrixes(_ size:Int ,randTimes: Int = 100) -> (BitMatrix<T>, BitMatrix<T>) {
         var a = BitMatrix(unitSquareForSize: size)
         var b = BitMatrix(unitSquareForSize: size)
         var operation = [Operation]()
@@ -21,28 +21,28 @@ extension BitMatrix {
                 row2 = ( row2 + 1 ) % size
             }
             if Int(arc4random()) % 2 == 0 {
-                operation.append(.SwitchRow(row1: row1, row2: row2))
+                operation.append(.switchRow(row1: row1, row2: row2))
             } else {
-                operation.append(.AddRow(row1: row1, row2: row2))
+                operation.append(.addRow(row1: row1, row2: row2))
                 
             }
         }
         for index in 0..<randTimes {
-            a.perform(operation: operation[index])
-            b.perform(operation: operation[randTimes - 1 - index])
+            a.perform(operation[index])
+            b.perform(operation[randTimes - 1 - index])
         }
         return (a,b)
     }
     
-    private mutating func perform(operation: Operation) {
+    private mutating func perform(_ operation: Operation) {
         switch operation {
-        case .SwitchRow(let row1, let row2):
+        case .switchRow(let row1, let row2):
             for col in 0..<self.numberOfRows {
                 let temp = self[row1, col]
                 self[row1, col] = self[row2, col]
                 self[row2, col] = temp
             }
-        case .AddRow(let row1, let row2):
+        case .addRow(let row1, let row2):
             for col in 0..<self.numberOfRows {
                 self[row1, col] = self[row1, col] ^ self[row2, col];
             }
@@ -53,12 +53,12 @@ extension BitMatrix {
 
 
 private enum Operation {
-    case SwitchRow(row1: Int, row2: Int)
-    case AddRow(row1: Int, row2: Int)
+    case switchRow(row1: Int, row2: Int)
+    case addRow(row1: Int, row2: Int)
 }
 
 extension BitMatrix {
-    public func subMatrix(row1: Int = 0, col1: Int = 0,
+    public func subMatrix(_ row1: Int = 0, col1: Int = 0,
                           row2 tempRow: Int = -1, col2 tempCol: Int = -1) ->BitMatrix! {
         var row2 = tempRow
         var col2 = tempCol
